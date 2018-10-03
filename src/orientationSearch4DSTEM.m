@@ -1,5 +1,5 @@
 function [bestMatch, bestErr, simStruct, expStruct] = orientationSearch4DSTEM(...
-    simTiltIms, meanImages, centres)
+    simTiltIms, tilts, meanImages, centres)
 % Function for loading a library of simulated 4DSTEM patterns at a range of
 % tilts that have been scaled to match experimental patterns derived from
 % clustering of 4DSTEM data.
