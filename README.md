@@ -5,7 +5,7 @@ Institution: UCLA Department of chemistry and biochemistry
 Email: marcusgj13@gmail.com 
 
 ## Introduction
-This set of functions were used to analyze low-dose 4DSTEM diffraction data from nanocrystals and determine the orientation of nm sized regions of the crystals. The associated publication can be found here (add hyperlink at some point). These functions can be used to first extract meaningful data from raw diffraction patterns and then perform unsupervised clustering to group regions of simmilar diffraction. At some point I may convert these scripts over to python also.
+This set of functions were used to analyze low-dose 4DSTEM diffraction data from nanocrystals and determine the orientation of nm sized regions of the crystals. The associated publication can be found here (add hyperlink at some point). These functions can be used to first extract meaningful data from raw diffraction patterns and then perform unsupervised clustering to group regions of similar diffraction. At some point I may convert these scripts over to python also.
 
 ### Dependencies
 Running these functions requires Matlab 2013A or later and the image processing and curve fitting toolboxes.
@@ -39,14 +39,14 @@ s4DSTEM = driftCorrect4DSTEM(s4DSTEM, badInds, centreX, centreY, offset, startSh
 __badInds__ is a vector containing the _XY_ location of hot pixels within the image, __centreX and Y__ are the pixel coordinates of the centre of the image, __offset__ is the size in pixels of the region around the centre to crop for COM alignment of the central disk, __startShifted__ indicates wether or not to use the shifted electron positions as a start point if running the script multiple times. All of the data provided has already gone through these two steps.
 
 #### Preparing data for clustering
-Clustering is performed on a reduced for of the images. This is to both improve SNR and also to reduce computation times. This is performed by the function __structToStack4DSTEM.m__ which will bin all images within the struct by a user defined ammount and also mask out the central beam. The rationale for this is that the central beam contains the most intensity and as such will heavily bias the outcome of clustering, rather than the presence/absence of Bragg peaks. The function is run as follows:
+Clustering is performed on a reduced for of the images. This is to both improve SNR and also to reduce computation times. This is performed by the function __structToStack4DSTEM.m__ which will bin all images within the struct by a user defined amount and also mask out the central beam. The rationale for this is that the central beam contains the most intensity and as such will heavily bias the outcome of clustering, rather than the presence/absence of Bragg peaks. The function is run as follows:
 ```matlab
 rStack = structToStack4DSTEM(s4DSTEM, binFactor, radius);
 ```
-__binFactor__ is the ammount you wish to reduce the image, for example to reduce the image to 1/8th its current size binFactor should be equal to 8. __radius__ is the radius of a circular mask used to remove the central disk from all binned images. Setting this too large may have strange effects on the clustering.
+__binFactor__ is the amount you wish to reduce the image, for example to reduce the image to 1/8th its current size binFactor should be equal to 8. __radius__ is the radius of a circular mask used to remove the central disk from all binned images. Setting this too large may have strange effects on the clustering.
 
 #### Unsupervised clustering of 4DSTEM data
-Clustering is performed via K-means with initial clusters being assigned by the Kmeans++ algorithm and simmilarity determined via Euclidean distance. Optionally _K_ can also be determined by G-means. Note that G-means has been modified such that 80% of the clustered data must be found to be gaussian by the Anderson-Darling statistic instead of 100% to account for clusters over free space being close to unity due to the low background noise. This algorithm is not determenistic and as such will give slightly different results with different runs if initialized with different cluster centres. The code is run as follows:
+Clustering is performed via K-means with initial clusters being assigned by the Kmeans++ algorithm and similarity determined via Euclidean distance. Optionally _K_ can also be determined by G-means. Note that G-means has been modified such that 80% of the clustered data must be found to be gaussian by the Anderson-Darling statistic instead of 100% to account for clusters over free space being close to unity due to the low background noise. This algorithm is not deterministic and as such will give slightly different results with different runs if initialized with different cluster centres. The code is run as follows:
 ```matlab
 [ clusteredInds, mindisFunc, wcss, meanImages, minShifts, initialCentres ] = ...
     KMeansPP4DSTEM( stackIn, numSets, numIterations,doMean, doShifts, initialize, scanX, scanY);
