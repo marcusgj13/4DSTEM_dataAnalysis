@@ -22,3 +22,11 @@ function [smoothImg cutoffRad]= smooth(img,resolutionCutoff)
     R = sqrt(Y.^2+X.^2);
     cutoffRad = ceil(min(abs(R)));
 end
+
+function kout = my_fft(img)
+kout = fftshift(fftn((ifftshift(img))));
+end
+
+function realout = my_ifft(k)
+realout =fftshift((ifftn(ifftshift(k))));
+end
