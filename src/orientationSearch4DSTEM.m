@@ -1,5 +1,5 @@
-function [bestMatch, bestErr, simStruct, expStruct] = orientationSearch4DSTEM(...
-    simTiltIms, meanImages, centres)
+function [bestMatch, bestErr, bestAngles, simStruct, expStruct] = orientationSearch4DSTEM(...
+    simTiltIms, tilts, meanImages, centres)
 % Function for loading a library of simulated 4DSTEM patterns at a range of
 % tilts that have been scaled to match experimental patterns derived from
 % clustering of 4DSTEM data.
@@ -106,7 +106,10 @@ for ii = 1:size(meanImages,3)
     [xx, yy] = find(squeeze(allErr(ii,:,:)) == bestErr(ii));
     bestMatch(1,ii) = xx;
     bestMatch(2,ii) = yy;
-   
-end
+    
+    bestAngles(1,ii) = simStruct.tiltX{xx,yy};
+    bestAngles(2,ii) = simStruct.tiltY{xx,yy};
+ end
+
 fprintf('====== Done! =======\n')
     
