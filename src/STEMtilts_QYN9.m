@@ -1,4 +1,4 @@
-function [emdSTEM] = STEMtilts_QYN9(atoms,cellDim,numFP)
+function [emdSTEM] = STEMtilts_QYN9(atoms, cellDim, xTiltArray, numFP)
 %% This function simulates NBED diffraction patterns over a range
 %  of thickness that would be collected from a 4DSTEM experiment. It
 %  requires a known structure which is provided by the two inputs, atoms
