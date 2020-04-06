@@ -5,7 +5,7 @@ Institution: UCLA Department of chemistry and biochemistry
 Email: marcusgj13@gmail.com 
 
 ## Introduction
-This set of functions were used to analyze low-dose 4DSTEM diffraction data from nanocrystals and determine the orientation of nm sized regions of the crystals. The associated publication can be found here (add hyperlink at some point). These functions can be used to first extract meaningful data from raw diffraction patterns and then perform unsupervised clustering to group regions of similar diffraction. At some point I may convert these scripts over to python also.
+This set of functions were used to analyze low-dose 4DSTEM diffraction data from nanocrystals and determine the orientation of nm sized regions of the crystals. The associated publication can be found [here](https://www.nature.com/articles/s42003-018-0263-8). These functions can be used to first extract meaningful data from raw diffraction patterns and then perform unsupervised clustering to group regions of similar diffraction. At some point I may convert these scripts over to python also.
 
 ### Dependencies
 Running these functions requires Matlab 2013A or later and the image processing and curve fitting toolboxes.
